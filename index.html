@@ -764,7 +764,7 @@ SIDEBAR
         <h1>FLA PYQs</h1>
 
         <p>
-         FORMAL LANGUAGES AND AUTOMATA THEORY
+          FORMAL LANGUAGES AND AUTOMATA THEORY
           Master Question Bank
         </p>
 
@@ -2685,7 +2685,7 @@ ${q.m} Marks
 
     // =====================================================================
     // RAZORPAY TRANSACTION ID VALIDATOR
-  
+
     // =====================================================================
     function isValidRazorpayTxn(txn) {
       if (!txn) return false;
@@ -2718,30 +2718,40 @@ ${q.m} Marks
       const phone = phoneInput.value.trim();
       const txn = txnInput.value.trim();
 
+      // --- Name missing ---
       if (!name || name.length < 2) {
         markError(nameInput, '⚠️ Apna naam daalo');
+        logToSheets('invalid_attempt', 'naam_missing | txn: ' + (txn || '-') + ' | phone: ' + (phone || '-'), name || '[blank]', phone || '[blank]');
         return;
       }
+      // --- Profanity ---
       if (containsProfanity(name)) {
         markError(nameInput, '🚫 Seedha naam daalo');
+        logToSheets('invalid_attempt', 'profanity_in_name | txn: ' + (txn || '-') + ' | phone: ' + (phone || '-'), name, phone || '[blank]');
         nameInput.value = '';
         return;
       }
 
       const digits = phone.replace(/\D/g, '');
+      // --- Phone invalid ---
       if (!digits || digits.length !== 10 || !/^[6-9]\d{9}$/.test(digits)) {
         markError(phoneInput, '⚠️ Valid Indian 10-digit number daalo (6-9 se shuru)');
+        logToSheets('invalid_attempt', 'phone_invalid | phone_entered: ' + (phone || '-') + ' | txn: ' + (txn || '-'), name, phone || '[blank]');
         return;
       }
 
+      // --- TXN missing ---
       if (!txn) {
         markError(txnInput, '⚠️ Transaction ID daalo');
+        logToSheets('invalid_attempt', 'txn_missing', name, digits);
         return;
       }
+      // --- TXN wrong format ---
       if (!isValidRazorpayTxn(txn)) {
         _attempts++;
         if (_attempts >= 3) _cooldownUntil = Date.now() + 30000;
         markError(txnInput, '❌ Invalid ID');
+        logToSheets('invalid_attempt', 'fake_txn | entered: ' + txn + ' | attempt#' + _attempts, name, digits);
         txnInput.value = '';
         return;
       }
@@ -2753,6 +2763,7 @@ ${q.m} Marks
 
       setTimeout(() => _grantAccess(txn, name, digits), 700);
     });
+
 
     [nameInput, phoneInput, txnInput].forEach(inp => {
       inp.addEventListener('input', () => {
