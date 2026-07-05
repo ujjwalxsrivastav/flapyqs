@@ -2685,8 +2685,7 @@ ${q.m} Marks
 
     // =====================================================================
     // RAZORPAY TRANSACTION ID VALIDATOR
-    // Real format (confirmed): pay_XXXXXXXXXXXXXX (pay_ + exactly 14-16 chars)
-    // Example: pay_T9iOXp824bvYB2  ← 14 alphanumeric chars after pay_
+  
     // =====================================================================
     function isValidRazorpayTxn(txn) {
       if (!txn) return false;
@@ -2742,7 +2741,7 @@ ${q.m} Marks
       if (!isValidRazorpayTxn(txn)) {
         _attempts++;
         if (_attempts >= 3) _cooldownUntil = Date.now() + 30000;
-        markError(txnInput, '❌ Razorpay ID format galat hai (e.g. pay_T9iOXp824bvYB2)');
+        markError(txnInput, '❌ Invalid ID');
         txnInput.value = '';
         return;
       }
