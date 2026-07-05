@@ -1,0 +1,2929 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <meta name="version" content="2.1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Computer Organization & Architecture | PYQ Master</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+
+      --bg: #f6f8fc;
+      --sidebar: #0f172a;
+      --primary: #2563eb;
+      --green: #10b981;
+      --red: #ef4444;
+      --orange: #f59e0b;
+
+      --card: #ffffff;
+      --border: #e5e7eb;
+      --text: #111827;
+      --muted: #6b7280;
+
+      --shadow: 0 12px 35px rgba(0, 0, 0, .08);
+
+    }
+
+    body {
+
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      overflow: hidden;
+
+    }
+
+    .app {
+
+      display: flex;
+      height: 100vh;
+
+    }
+
+    /* ===========================
+            SIDEBAR
+        ============================ */
+
+    aside {
+
+      width: 295px;
+      background: var(--sidebar);
+      color: white;
+
+      display: flex;
+      flex-direction: column;
+
+      overflow-y: auto;
+
+    }
+
+    .logo {
+
+      padding: 35px 28px 25px;
+
+      border-bottom: 1px solid rgba(255, 255, 255, .08);
+
+    }
+
+    .logo h1 {
+
+      font-size: 24px;
+      font-weight: 800;
+
+    }
+
+    .logo p {
+
+      margin-top: 8px;
+      font-size: 13px;
+      color: #94a3b8;
+
+    }
+
+    .menu {
+
+      padding: 22px;
+
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+
+    }
+
+    .menu-title {
+
+      margin-top: 14px;
+      margin-bottom: 6px;
+
+      color: #64748b;
+
+      font-size: 12px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+
+    }
+
+    .nav-item {
+
+      padding: 14px 18px;
+
+      border-radius: 12px;
+
+      cursor: pointer;
+
+      transition: .25s;
+
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      font-size: 15px;
+
+    }
+
+    .nav-item:hover {
+
+      background: rgba(255, 255, 255, .07);
+
+    }
+
+    .nav-item.active {
+
+      background: var(--primary);
+
+    }
+
+    .count {
+
+      font-size: 12px;
+
+      padding: 4px 8px;
+
+      border-radius: 30px;
+
+      background: rgba(255, 255, 255, .12);
+
+    }
+
+    /* ==========================
+            MAIN
+        =========================== */
+
+    main {
+
+      flex: 1;
+
+      overflow-y: auto;
+
+      padding: 45px;
+
+    }
+
+    .top {
+
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 25px;
+
+      margin-bottom: 35px;
+
+    }
+
+    .heading h2 {
+
+      font-size: 34px;
+      font-weight: 800;
+
+    }
+
+    .heading p {
+
+      margin-top: 8px;
+      color: var(--muted);
+
+    }
+
+    /* ==========================
+            SEARCH
+        =========================== */
+
+    .search-box {
+
+      width: 420px;
+
+      position: relative;
+
+    }
+
+    .search {
+
+      width: 100%;
+
+      padding: 16px 20px;
+
+      border: 1px solid var(--border);
+
+      border-radius: 14px;
+
+      background: white;
+
+      outline: none;
+
+      font-size: 15px;
+
+    }
+
+    .search:focus {
+
+      border-color: var(--primary);
+
+    }
+
+    /* ==========================
+            FILTER BAR
+        =========================== */
+
+    .toolbar {
+
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+
+      margin-bottom: 30px;
+
+    }
+
+    .chip {
+
+      padding: 10px 18px;
+
+      border-radius: 30px;
+
+      background: white;
+
+      border: 1px solid var(--border);
+
+      cursor: pointer;
+
+      transition: .25s;
+
+      font-size: 14px;
+
+    }
+
+    .chip:hover {
+
+      background: #eef4ff;
+
+      border-color: var(--primary);
+
+    }
+
+    .chip.active {
+
+      background: var(--primary);
+      color: white;
+
+      border-color: var(--primary);
+
+    }
+
+    /* ==========================
+            GRID
+        =========================== */
+
+    .grid {
+
+      display: grid;
+
+      grid-template-columns:
+        repeat(auto-fill, minmax(300px, 1fr));
+
+      gap: 22px;
+
+    }
+
+    /* ==========================
+            CARD
+        =========================== */
+
+    .card {
+
+      background: var(--card);
+
+      border: 1px solid var(--border);
+
+      border-radius: 18px;
+
+      padding: 24px;
+
+      box-shadow: var(--shadow);
+
+      transition: .25s;
+
+    }
+
+    .card:hover {
+
+      transform: translateY(-4px);
+
+    }
+
+    .badges {
+
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+
+      margin-bottom: 16px;
+
+    }
+
+    .badge {
+
+      padding: 5px 10px;
+
+      border-radius: 25px;
+
+      font-size: 11px;
+
+      font-weight: 700;
+
+      letter-spacing: .4px;
+
+    }
+
+    .unit {
+
+      background: #dbeafe;
+      color: #1d4ed8;
+
+    }
+
+    .easy {
+
+      background: #dcfce7;
+      color: #166534;
+
+    }
+
+    .medium {
+
+      background: #fef3c7;
+      color: #92400e;
+
+    }
+
+    .hard {
+
+      background: #fee2e2;
+      color: #991b1b;
+
+    }
+
+    .repeat {
+
+      background: #fef2f2;
+      color: #dc2626;
+
+    }
+
+    .qno {
+
+      color: var(--primary);
+
+      font-size: 13px;
+
+      font-weight: 700;
+
+      margin-bottom: 10px;
+
+    }
+
+    .question {
+
+      font-size: 16px;
+
+      line-height: 1.7;
+
+      font-weight: 600;
+
+      margin-bottom: 24px;
+
+    }
+
+    .footer {
+
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      border-top: 1px solid var(--border);
+
+      padding-top: 15px;
+
+      color: var(--muted);
+
+      font-size: 13px;
+
+    }
+
+    /* ==========================
+            EMPTY
+        =========================== */
+
+    .empty {
+
+      display: none;
+
+      text-align: center;
+
+      margin-top: 120px;
+
+      color: var(--muted);
+
+    }
+
+    .empty h2 {
+
+      margin-bottom: 12px;
+
+    }
+
+    /* ==========================
+            RESPONSIVE
+        =========================== */
+
+    /* ==========================
+            TOP-LEFT WRAPPER
+        =========================== */
+
+    .top-left {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+    }
+
+    /* ==========================
+            HAMBURGER BUTTON
+        =========================== */
+
+    .hamburger {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      width: 46px;
+      height: 46px;
+      background: white;
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      cursor: pointer;
+      font-size: 20px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, .06);
+      flex-shrink: 0;
+      transition: background .2s;
+      line-height: 1;
+      margin-top: 3px;
+    }
+
+    .hamburger:hover {
+      background: #f1f5f9;
+    }
+
+    /* ==========================
+            OVERLAY
+        =========================== */
+
+    .overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, .5);
+      z-index: 200;
+      backdrop-filter: blur(3px);
+      -webkit-backdrop-filter: blur(3px);
+    }
+
+    .overlay.show {
+      display: block;
+    }
+
+    /* ==========================
+            PAYMENT MODAL
+        =========================== */
+
+    .pay-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, #0d1b2e 0%, #1a3a6e 55%, #0d1b2e 100%);
+      z-index: 9999;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 36px 20px 24px;
+      box-sizing: border-box;
+      overflow-y: auto;
+    }
+
+    .pay-box {
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 38px 32px 26px;
+      max-width: 460px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 40px 100px rgba(0, 0, 0, .55);
+      position: relative;
+      animation: payIn .45s cubic-bezier(.34, 1.56, .64, 1);
+    }
+
+    @keyframes payIn {
+      from {
+        opacity: 0;
+        transform: scale(.88) translateY(24px);
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
+    }
+
+    .pay-top-badge {
+      position: absolute;
+      top: -17px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: linear-gradient(135deg, #f59e0b, #ef4444);
+      color: white;
+      padding: 6px 22px;
+      border-radius: 30px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      white-space: nowrap;
+      box-shadow: 0 4px 16px rgba(239, 68, 68, .35);
+    }
+
+    .pay-icon {
+      font-size: 38px;
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    .pay-box h2 {
+      font-size: 22px;
+      font-weight: 800;
+      color: #0f172a;
+      margin-bottom: 4px;
+      letter-spacing: -.5px;
+    }
+
+    .pay-desc {
+      color: #64748b;
+      font-size: 13px;
+      line-height: 1.5;
+      margin-bottom: 14px;
+    }
+
+    .pay-features {
+      text-align: left;
+      background: #f0f7ff;
+      border-radius: 10px;
+      padding: 8px 14px;
+      margin-bottom: 14px;
+      border: 1px solid #dbeafe;
+    }
+
+    .pay-feature {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12.5px;
+      color: #374151;
+      padding: 3px 0;
+      font-weight: 500;
+    }
+
+    .pay-feature::before {
+      content: "✓";
+      color: #10b981;
+      font-weight: 800;
+      font-size: 14px;
+      flex-shrink: 0;
+    }
+
+    .pay-amount {
+      font-size: 38px;
+      font-weight: 900;
+      color: #0f172a;
+      margin-bottom: 12px;
+      letter-spacing: -1px;
+      line-height: 1;
+    }
+
+    .pay-amount sup {
+      font-size: 18px;
+      font-weight: 700;
+      vertical-align: super;
+    }
+
+    .pay-amount small {
+      font-size: 13px;
+      color: #94a3b8;
+      font-weight: 500;
+    }
+
+    .pay-btn {
+      width: 100%;
+      padding: 13px;
+      background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+      transition: transform .2s, box-shadow .2s;
+      box-shadow: 0 8px 28px rgba(37, 99, 235, .4);
+      letter-spacing: -.2px;
+    }
+
+    .pay-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 14px 36px rgba(37, 99, 235, .5);
+    }
+
+    .pay-btn:active {
+      transform: translateY(-1px);
+    }
+
+    .pay-note {
+      margin-top: 14px;
+      font-size: 11px;
+      color: #94a3b8;
+      line-height: 1.6;
+    }
+
+    /* ==========================
+            RESPONSIVE
+        =========================== */
+
+    @media (max-width: 900px) {
+
+      aside {
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        width: 280px;
+        transform: translateX(-100%);
+        z-index: 300;
+        transition: transform .3s cubic-bezier(.4, 0, .2, 1);
+        box-shadow: 4px 0 32px rgba(0, 0, 0, .35);
+      }
+
+      aside.open {
+        transform: translateX(0);
+      }
+
+      .hamburger {
+        display: flex;
+      }
+
+      main {
+        padding: 18px 16px;
+      }
+
+      .top {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+        margin-bottom: 18px;
+      }
+
+      .heading h2 {
+        font-size: 22px;
+      }
+
+      .search-box {
+        width: 100%;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+        gap: 14px;
+      }
+
+      .pay-box {
+        padding: 44px 22px 32px;
+      }
+
+      .pay-box h2 {
+        font-size: 22px;
+      }
+
+      .pay-amount {
+        font-size: 38px;
+      }
+
+    }
+
+    @media (min-width: 901px) and (max-width: 1280px) {
+
+      main {
+        padding: 30px 32px;
+      }
+
+      .search-box {
+        width: 300px;
+      }
+
+    }
+  </style>
+
+</head>
+
+<body>
+
+  <div class="app">
+
+    <!-- Sidebar Overlay (mobile) -->
+    <div class="overlay" id="overlay"></div>
+
+    <!-- ===========================
+SIDEBAR
+=========================== -->
+
+    <aside>
+
+      <div class="logo">
+
+        <h1>FLA PYQs</h1>
+
+        <p>
+          Computer Organization &
+          Architecture
+          Master Question Bank
+        </p>
+
+      </div>
+
+      <div class="menu">
+
+        <div class="menu-title">
+          GENERAL
+        </div>
+
+        <div class="nav-item active" data-filter="all">
+
+          <span>📚 All Questions</span>
+
+          <span class="count" id="allCount">
+            0
+          </span>
+
+        </div>
+
+        <div class="nav-item" data-filter="repeat">
+
+          <span>🔥 Most Repeated</span>
+
+          <span class="count" id="repeatCount">
+            0
+          </span>
+
+        </div>
+
+        <div class="menu-title">
+          UNITS
+        </div>
+
+        <div class="nav-item" data-filter="1">
+
+          <span>Unit 1</span>
+
+          <span class="count" id="u1">
+            0
+          </span>
+
+        </div>
+
+        <div class="nav-item" data-filter="2">
+
+          <span>Unit 2</span>
+
+          <span class="count" id="u2">
+            0
+          </span>
+
+        </div>
+
+        <div class="nav-item" data-filter="3">
+
+          <span>Unit 3</span>
+
+          <span class="count" id="u3">
+            0
+          </span>
+
+        </div>
+
+        <div class="nav-item" data-filter="4">
+
+          <span>Unit 4</span>
+
+          <span class="count" id="u4">
+            0
+          </span>
+
+        </div>
+
+        <div class="nav-item" data-filter="5">
+
+          <span>Unit 5</span>
+
+          <span class="count" id="u5">
+            0
+          </span>
+
+        </div>
+
+      </div>
+
+    </aside>
+
+    <!-- ===========================
+MAIN
+=========================== -->
+
+    <main>
+
+      <div class="top">
+
+        <div class="top-left">
+
+          <button class="hamburger" id="hamburger" aria-label="Open menu">&#9776;</button>
+
+          <div class="heading">
+
+            <h2 id="pageTitle">All Questions</h2>
+
+            <p id="pageSub">FLA Previous Year Questions &mdash; Filter by Unit, Difficulty &amp; Marks</p>
+
+          </div>
+
+        </div>
+
+        <div class="search-box">
+
+          <input type="text" id="search" class="search" placeholder="&#128269; Search questions, keywords, paper...">
+
+        </div>
+
+      </div>
+
+      <div class="toolbar">
+
+        <div class="chip active" data-chip="all">
+          All
+        </div>
+
+        <div class="chip" data-chip="Easy">
+          Easy
+        </div>
+
+        <div class="chip" data-chip="Medium">
+          Medium
+        </div>
+
+        <div class="chip" data-chip="Hard">
+          Hard
+        </div>
+
+        <div class="chip" data-chip="5">
+          5 Marks
+        </div>
+
+        <div class="chip" data-chip="10">
+          10 Marks
+        </div>
+
+      </div>
+
+      <div id="grid" class="grid">
+      </div>
+
+      <div class="empty" id="empty">
+
+        <h2>
+          No Questions Found
+        </h2>
+
+        <p>
+          Try another keyword.
+        </p>
+
+      </div>
+
+    </main>
+
+  </div>
+
+  <!-- ===========================
+  PAYMENT MODAL (outside .app to avoid flex container positioning issues)
+  =========================== -->
+  <div class="pay-overlay" id="payOverlay">
+    <div class="pay-box">
+      <div class="pay-top-badge">&#127891; STUDENT ACCESS PASS</div>
+      <span class="pay-icon">&#128218;</span>
+      <h2>FLA PYQ Master</h2>
+      <p class="pay-desc">Unlock complete access to 200+ Computer Organization &amp; Architecture Previous Year
+        Questions &mdash; unit-wise, difficulty-filtered &amp; mobile friendly.</p>
+      <div class="pay-features">
+        <div class="pay-feature">200+ Curated PYQ Questions (2022&ndash;2025)</div>
+        <div class="pay-feature">Unit-wise &amp; Difficulty Filters</div>
+        <div class="pay-feature">&#128293; Most Repeated Questions Highlighted</div>
+        <div class="pay-feature">Lightning-fast Search &middot; Works on Mobile</div>
+        <div class="pay-feature">Lifetime Access &middot; No Subscription</div>
+      </div>
+      <div class="pay-amount"><sup>&#8377;</sup>10 <small>one-time</small></div>
+
+      <!-- Anchor tag (not button) so popup blocker doesn't interfere -->
+      <a class="pay-btn" id="payBtn" href="https://razorpay.me/@ujjwalsrivastava" target="_blank" rel="noopener"
+        style="display:block; text-decoration:none;">
+        &#128275; Pay &#8377;10 via Razorpay
+      </a>
+
+      <!-- Transaction ID verification (always visible) -->
+      <div id="payStep2" style="margin-top:16px;">
+        <hr style="border:none; border-top:1px solid #e2e8f0; margin:0 0 14px 0;">
+        <p style="font-size:13px; color:#374151; font-weight:600; margin-bottom:10px; text-align:left;">&#9989; Payment
+          done? Fill in your details to get access:</p>
+        <input type="text" id="nameInput" placeholder="Apna Naam (e.g. Rahul Sharma)"
+          style="width:100%; padding:12px 14px; border:1.5px solid #d1d5db; border-radius:10px; font-size:14px; font-family:'Inter',sans-serif; outline:none; margin-bottom:8px; box-sizing:border-box;">
+        <input type="tel" id="phoneInput" placeholder="WhatsApp Number (e.g. 9876543210)"
+          style="width:100%; padding:12px 14px; border:1.5px solid #d1d5db; border-radius:10px; font-size:14px; font-family:'Inter',sans-serif; outline:none; margin-bottom:8px; box-sizing:border-box;">
+        <input type="text" id="txnInput" placeholder="Razorpay Transaction ID"
+          style="width:100%; padding:12px 14px; border:1.5px solid #d1d5db; border-radius:10px; font-size:14px; font-family:'Inter',sans-serif; outline:none; margin-bottom:10px; box-sizing:border-box;">
+        <button id="verifyBtn"
+          style="width:100%; padding:14px; background:linear-gradient(135deg,#10b981,#059669); color:white; border:none; border-radius:12px; font-size:15px; font-weight:700; cursor:pointer; font-family:'Inter',sans-serif; box-shadow:0 6px 20px rgba(16,185,129,.35);">&#10003;
+          Verify &amp; Get Access</button>
+        <p style="margin-top:8px; font-size:11px; color:#94a3b8;">Naam, WhatsApp number aur Transaction ID &mdash; teeno
+          required hain</p>
+      </div>
+
+      <p class="pay-note">&#128274; Secure via Razorpay &nbsp;&middot;&nbsp; One-time payment &nbsp;&middot;&nbsp;
+        Instant access</p>
+    </div>
+  </div>
+
+  <script>
+
+    // ========================================
+    // PART 2 STARTS HERE
+    // ========================================
+
+    // Paste
+
+    // const Q=[...]
+
+    // here
+    // ======================================================
+    // PASTE YOUR DATABASE HERE
+    // ======================================================
+
+    // const Q=[ ... ];
+
+    // ======================================================
+    // DOM
+    // ======================================================
+    const Q = [ // ========================== UNIT 1 : FUNCTIONAL BLOCKS OF A COMPUTER ==========================
+      // ========================== UNIT 1 ==========================
+      // Alphabets, Strings, Languages, DFA, NFA, ε-NFA, DFA Minimization
+
+      {
+        u: 1,
+        no: "2025Q1(a)(i)",
+        q: "Interpret the regular expression for the given finite automaton. Justify your solution while ensuring language preservation and correctness.",
+        p: "2024-25 Even",
+        m: 10,
+        d: "Hard"
+      },
+
+      {
+        u: 1,
+        no: "2025Q1(a)(ii)",
+        q: "Construct a Deterministic Finite Automaton (DFA) for the language L = {x | x is a string of (zero or more) 0's, 1's and 2's such that x does not contain the substring 00}. Explain each tuple of the constructed DFA.",
+        p: "2024-25 Even",
+        m: 10,
+        d: "Hard",
+        repeat: true
+      },
+
+      {
+        u: 1,
+        no: "2025Q1(b)",
+        q: "Construct a minimum-state automaton equivalent to the given Deterministic Finite Automaton (DFA). Also construct a Regular Grammar accepting the language recognized by the derived minimized DFA.",
+        p: "2024-25 Even",
+        m: 10,
+        d: "Hard",
+        repeat: true
+      },
+
+      {
+        u: 1,
+        no: "2025Q3(c)",
+        q: "Construct an ε-Nondeterministic Finite Automaton (ε-NFA) for the language L = {w ∈ {a,b,c}* | w starts with ε or a, followed by any number of b and c}. Then convert this ε-NFA into an equivalent DFA with all necessary steps.",
+        p: "2024-25 Even",
+        m: 10,
+        d: "Hard",
+        repeat: true
+      },
+
+      {
+        u: 1,
+        no: "2024Q1(a)",
+        q: "Give a DFA that recognizes the language {w ∈ {0,1}* | w contains 110 as a substring}.",
+        p: "2023-24",
+        m: 5,
+        d: "Easy",
+        repeat: true
+      },
+
+      {
+        u: 1,
+        no: "2024Q1(b)",
+        q: "Convert the given Deterministic Finite Automaton into an equivalent Regular Expression.",
+        p: "2023-24",
+        m: 5,
+        d: "Medium"
+      },
+
+      {
+        u: 1,
+        no: "2024Q2(b)",
+        q: "Give a DFA that recognizes the language {w ∈ {0,1}* | w contains at least two 0's}.",
+        p: "2023-24",
+        m: 5,
+        d: "Easy",
+        repeat: true
+      },
+
+      {
+        u: 1,
+        no: "2024Q2(d)",
+        q: "Construct a Deterministic Finite Automaton to accept the set of all strings over {0,1} ending with 010.",
+        p: "2023-24",
+        m: 5,
+        d: "Medium",
+        repeat: true
+      },
+
+      {
+        u: 1,
+        no: "2024Q2(e)",
+        q: "Differentiate between Deterministic Finite Automata (DFA) and Non-Deterministic Finite Automata (NFA).",
+        p: "2023-24",
+        m: 5,
+        d: "Easy",
+        repeat: true
+      },
+
+      {
+        u: 1,
+        no: "2023Q2(a)",
+        q: "Differentiate between DFA and NFA.",
+        p: "2023-24 (TAFL)",
+        m: 5,
+        d: "Easy",
+        repeat: true
+      },
+
+      {
+        u: 1,
+        no: "2023Q2(b)",
+        q: "Construct a DFA and its transition table for the language over Σ={0,1} that ends in 101.",
+        p: "2023-24 (TAFL)",
+        m: 5,
+        d: "Medium",
+        repeat: true
+      },
+
+      {
+        u: 1,
+        no: "2023Q2(e)",
+        q: "Discuss minimization of Finite Automata.",
+        p: "2023-24 (TAFL)",
+        m: 5,
+        d: "Medium",
+        repeat: true
+      },
+
+      {
+        u: 1,
+        no: "2023Q2(f)",
+        q: "How does a Moore Machine differ from a Mealy Machine?",
+        p: "2023-24 (TAFL)",
+        m: 5,
+        d: "Easy",
+        repeat: true
+      },// ========================== UNIT 2 ==========================
+      // Regular Expressions, Arden's Theorem, Pumping Lemma, Closure Properties,
+      // Moore & Mealy Machines
+
+      {
+        u: 2,
+        no: "2025Q1(a)(i)",
+        q: "Interpret the regular expression for the given finite automaton. Justify your solution while ensuring language preservation and correctness.",
+        p: "2024-25 Even",
+        m: 10,
+        d: "Hard",
+        repeat: true
+      },
+
+      {
+        u: 2,
+        no: "2025Q1(c)",
+        q: "Differentiate between Mealy Machine and Moore Machine based on their tuples. Construct a Moore Machine over {a,b}* that produces outputs based on the last three characters of the input as follows: (i) Output X if the string ends in 'bab', (ii) Output Y if the string ends in 'bba', (iii) Output Z otherwise.",
+        p: "2024-25 Even",
+        m: 10,
+        d: "Hard",
+        repeat: true
+      },
+
+      {
+        u: 2,
+        no: "2025Q3(a)(i)",
+        q: "Construct a Finite Automaton corresponding to the Regular Expression (a+b)*ab*a(a+ba)*.",
+        p: "2024-25 Even",
+        m: 10,
+        d: "Medium"
+      },
+
+      {
+        u: 2,
+        no: "2025Q3(a)(ii)",
+        q: "Using Regular Set Identities, prove that ε*(ε+b(ab))*(b*(abb))*= (b+abb)*(b+abb)*. Clearly state each identity used in the transformation.",
+        p: "2024-25 Even",
+        m: 10,
+        d: "Hard"
+      },
+
+      {
+        u: 2,
+        no: "2025Q4(c)",
+        q: "State and prove Arden's Theorem. Find the Regular Expression using Arden's Theorem corresponding to the given automaton.",
+        p: "2024-25 Even",
+        m: 10,
+        d: "Hard",
+        repeat: true
+      },
+
+      {
+        u: 2,
+        no: "2025Q5(a)",
+        q: "Interpret the Regular Expressions for the given languages: (i) Binary strings of length congruent to 2 (mod 3), (ii) Strings over {a,b} starting with 'a' and having even length, (iii) Binary strings containing at most two 0's, (iv) Strings ending with 'a' and not containing 'bb', (v) Binary strings whose 10th symbol from the right is '0'.",
+        p: "2024-25 Even",
+        m: 10,
+        d: "Hard"
+      },
+
+      {
+        u: 2,
+        no: "2024Q1(b)",
+        q: "Convert the given Deterministic Finite Automaton into an equivalent Regular Expression.",
+        p: "2023-24",
+        m: 5,
+        d: "Medium",
+        repeat: true
+      },
+
+      {
+        u: 2,
+        no: "2024Q1(e)",
+        q: "Discuss four Closure Properties of Regular Languages and prove that Regular Languages are closed under them.",
+        p: "2023-24",
+        m: 5,
+        d: "Medium",
+        repeat: true
+      },
+
+      {
+        u: 2,
+        no: "2024Q1(f)",
+        q: "What is Pumping Lemma for Regular Languages?",
+        p: "2023-24",
+        m: 5,
+        d: "Easy",
+        repeat: true
+      },
+
+      {
+        u: 2,
+        no: "2024Q2(f)",
+        q: "What are Regular Expressions? Discuss the operators of Regular Expressions and their precedence.",
+        p: "2023-24",
+        m: 5,
+        d: "Easy",
+        repeat: true
+      },
+
+      {
+        u: 2,
+        no: "2023Q1(a)",
+        q: "Discuss Kleene Closure and Languages in Automata.",
+        p: "2023-24 (TAFL)",
+        m: 5,
+        d: "Easy"
+      },
+
+      {
+        u: 2,
+        no: "2023Q1(c)",
+        q: "Discuss Arden's Theorem with suitable example.",
+        p: "2023-24 (TAFL)",
+        m: 5,
+        d: "Medium",
+        repeat: true
+      },
+
+      {
+        u: 2,
+        no: "2023Q2(c)",
+        q: "Discuss the Properties of Regular Languages.",
+        p: "2023-24 (TAFL)",
+        m: 5,
+        d: "Medium",
+        repeat: true
+      },
+
+      {
+        u: 2,
+        no: "2023Q2(d)",
+        q: "Explain Pumping Lemma for Regular Languages.",
+        p: "2023-24 (TAFL)",
+        m: 5,
+        d: "Easy",
+        repeat: true
+      },
+
+      {
+        u: 2,
+        no: "2023Q2(f)",
+        q: "How does a Moore Machine differ from a Mealy Machine?",
+        p: "2023-24 (TAFL)",
+        m: 5,
+        d: "Easy",
+        repeat: true
+      },// ========================== UNIT 3 ==========================
+      // Context Free Grammars, PDA, Parse Trees, Ambiguity,
+      // CNF, GNF, CFL, Pumping Lemma for CFL
+
+      {
+        u: 3,
+        no: "2025Q2(a)(i)",
+        q: "Differentiate between Chomsky Normal Form (CNF) and Greibach Normal Form (GNF) on the basis of their expressions. Convert the grammar X→YXY|yY, Y→Z|X, Z→z into Chomsky Normal Form.",
+        p: "2024-25 Even",
+        m: 10,
+        d: "Hard",
+        repeat: true
+      },
+
+      {
+        u: 3,
+        no: "2025Q2(a)(ii)",
+        q: "Using the Pumping Lemma, show that the language L = {aⁿ2ⁿ | n ≥ 1} is not Context-Free.",
+        p: "2024-25 Even",
+        m: 10,
+        d: "Hard",
+        repeat: true
+      },
+
+      {
+        u: 3,
+        no: "2025Q2(b)",
+        q: "Explain the concept of Pushdown Automaton (PDA) using all relevant tuples. Design a Pushdown Automaton that accepts by empty stack the language generated by the grammar S → aSa | bSb | c.",
+        p: "2024-25 Even",
+        m: 10,
+        d: "Hard",
+        repeat: true
+      },
+
+      {
+        u: 3,
+        no: "2025Q4(a)(ii)",
+        q: "Consider the production rules S→aB|bA, A→aSbAA|a, B→bS|aBB|b. For the string aaabbabbba, draw the Parse Tree and determine whether the grammar is ambiguous.",
+        p: "2024-25 Even",
+        m: 10,
+        d: "Hard",
+        repeat: true
+      },
+
+      {
+        u: 3,
+        no: "2025Q4(b)",
+        q: "Explain all the stack operations that take place in a Pushdown Automaton (PDA). Then create a PDA and its final state for the language L={|w|a=|w|b | where w∈{a,b}*}.",
+        p: "2024-25 Even",
+        m: 10,
+        d: "Hard",
+        repeat: true
+      },
+
+      {
+        u: 3,
+        no: "2024Q1(c)",
+        q: "Give Context-Free Grammars having two variables generating the language over {a,b}: L = {The set of strings with more a's than b's}.",
+        p: "2023-24",
+        m: 5,
+        d: "Medium"
+      },
+
+      {
+        u: 3,
+        no: "2024Q1(d)",
+        q: "State whether the statement is true or false and briefly justify: 'The class of Context-Free Languages is closed under Intersection.'",
+        p: "2023-24",
+        m: 5,
+        d: "Medium"
+      },
+
+      {
+        u: 3,
+        no: "2024Q2(a)",
+        q: "Put the given grammar into Chomsky Normal Form (CNF): S→T|TaS, T→aTb|bTa|TT|ε.",
+        p: "2023-24",
+        m: 5,
+        d: "Medium",
+        repeat: true
+      },
+
+      {
+        u: 3,
+        no: "2024Q2(c)",
+        q: "State whether the statement is true or false and briefly justify: 'If G is a Context-Free Grammar and w∈L(G), then the number of leaves in the Parse Tree of w may be greater than the length of w.'",
+        p: "2023-24",
+        m: 5,
+        d: "Medium"
+      },
+
+      {
+        u: 3,
+        no: "2024Q3(a)",
+        q: "Design a Non-deterministic Pushdown Automaton (NPDA) that recognizes the language L={wwᴿ | w∈{0,1}*}. Give the informal description of the PDA.",
+        p: "2023-24",
+        m: 10,
+        d: "Hard",
+        repeat: true
+      },
+
+      {
+        u: 3,
+        no: "2024Q3(c)",
+        q: "Elaborate Chomsky Normal Form (CNF) and Greibach Normal Form (GNF).",
+        p: "2023-24",
+        m: 10,
+        d: "Medium",
+        repeat: true
+      },
+
+      {
+        u: 3,
+        no: "2024Q4(b)",
+        q: "Complete the given Pushdown Automaton (PDA) state transition diagram that recognizes L={aⁱbʲcᵏ | i,j,k≥0 and i=j or i=k}.",
+        p: "2023-24",
+        m: 10,
+        d: "Hard"
+      },
+
+      {
+        u: 3,
+        no: "2024Q5(a)",
+        q: "Find a grammar having a single variable that generates the language L={aⁿbⁿ⁺¹ | n≥0}. Give the complete specification of the grammar. Construct Parse Trees for any two strings w∈L where |w|=5 and determine whether the grammar is ambiguous.",
+        p: "2023-24",
+        m: 10,
+        d: "Hard"
+      },
+
+      {
+        u: 3,
+        no: "2023Q3(a)",
+        q: "Explain Pumping Lemma for Context-Free Languages. Obtain a Context-Free Grammar (CFG) for the language of Palindromes over the alphabet {a,b,c}.",
+        p: "2023-24 (TAFL)",
+        m: 10,
+        d: "Hard",
+        repeat: true
+      },
+
+      {
+        u: 3,
+        no: "2023Q3(b)",
+        q: "Explain Pushdown Automata. Construct a PDA to accept the language by Empty Store where L={aⁿbⁿ | n≥1}.",
+        p: "2023-24 (TAFL)",
+        m: 10,
+        d: "Hard",
+        repeat: true
+      },
+
+      {
+        u: 3,
+        no: "2023Q3(c)",
+        q: "What is a Parse Tree? Consider the grammar S→A1B, A→0A|ε, B→0B|1B|ε. For the string w=00101 identify the Leftmost Derivation, Rightmost Derivation and construct the Parse Tree.",
+        p: "2023-24 (TAFL)",
+        m: 10,
+        d: "Hard",
+        repeat: true
+      },
+
+      {
+        u: 3,
+        no: "2023Q4(a)",
+        q: "Explain Context-Sensitive Grammars and Languages. Examine the grammar S→A|B, A→aAb|ab, B→abB|ε and identify whether the grammar is ambiguous or not.",
+        p: "2023-24 (TAFL)",
+        m: 10,
+        d: "Hard"
+      },
+
+      {
+        u: 3,
+        no: "2023Q4(c)",
+        q: "Explain Chomsky Normal Form and Greibach Normal Form. Find a grammar in Chomsky Normal Form equivalent to S→aAbB, A→aA|a, B→bB|b.",
+        p: "2023-24 (TAFL)",
+        m: 10,
+        d: "Hard",
+        repeat: true
+      },// ========================== UNIT 4 ==========================
+      // Context Sensitive Languages, LBA, Turing Machines,
+      // Recursive / RE Languages, Unrestricted Grammar, Enumerators
+
+      {
+        u: 4,
+        no: "2025Q3(b)",
+        q: "Describe the concept of Recursively Enumerable Languages. Design a Turing Machine for the language L ending with 'aba' over Σ={a,b}. Explain each tuple of the constructed Turing Machine.",
+        p: "2024-25 Even",
+        m: 10,
+        d: "Hard",
+        repeat: true
+      },
+
+      {
+        u: 4,
+        no: "2025Q4(a)(i)",
+        q: "Explain the various generative abilities of grammars according to Chomsky's Hierarchy. Additionally, specify the types of automata that recognize them.",
+        p: "2024-25 Even",
+        m: 10,
+        d: "Medium",
+        repeat: true
+      },
+
+      {
+        u: 4,
+        no: "2025Q5(b)(ii)",
+        q: "Write a brief explanation of Church-Turing Thesis.",
+        p: "2024-25 Even",
+        m: 5,
+        d: "Easy",
+        repeat: true
+      },
+
+      {
+        u: 4,
+        no: "2025Q5(b)(iii)",
+        q: "Write a brief explanation of Universal Turing Machine.",
+        p: "2024-25 Even",
+        m: 5,
+        d: "Easy",
+        repeat: true
+      },
+
+      {
+        u: 4,
+        no: "2025Q5(c)",
+        q: "Design a Turing Machine for Σ={a,b,c} that accepts the language L={aⁿbⁿcⁿ | n≥1}. Outline the concept of a Turing Machine and explain the complete construction.",
+        p: "2024-25 Even",
+        m: 10,
+        d: "Hard",
+        repeat: true
+      },
+
+      {
+        u: 4,
+        no: "2024Q3(b)",
+        q: "Design a Turing Machine with no more than three states that accepts the language L=a(a+b)*. Assume Σ={a,b}. Is it possible to construct such a machine using only two states?",
+        p: "2023-24",
+        m: 10,
+        d: "Hard",
+        repeat: true
+      },
+
+      {
+        u: 4,
+        no: "2024Q4(a)",
+        q: "Design a Turing Machine that copies strings of 1's. More precisely, construct a machine that performs the computation q₀w ⊢* qfww. Give the pseudocode of the design.",
+        p: "2023-24",
+        m: 10,
+        d: "Hard"
+      },
+
+      {
+        u: 4,
+        no: "2024Q4(c)",
+        q: "What are Recursive Languages? Discuss the Properties of Recursive Languages.",
+        p: "2023-24",
+        m: 10,
+        d: "Medium",
+        repeat: true
+      },
+
+      {
+        u: 4,
+        no: "2023Q1(d)",
+        q: "Create Chomsky Hierarchy of Languages.",
+        p: "2023-24 (TAFL)",
+        m: 5,
+        d: "Easy",
+        repeat: true
+      },
+
+      {
+        u: 4,
+        no: "2023Q1(e)",
+        q: "How does Type-0 Grammar differ from Type-1 Grammar?",
+        p: "2023-24 (TAFL)",
+        m: 5,
+        d: "Easy"
+      },
+
+      {
+        u: 4,
+        no: "2023Q4(a)",
+        q: "Explain Context-Sensitive Grammars and Languages. Examine the grammar S→A|B, A→aAb|ab, B→abB|ε and determine whether the grammar is ambiguous.",
+        p: "2023-24 (TAFL)",
+        m: 10,
+        d: "Hard",
+        repeat: true
+      },
+
+      {
+        u: 4,
+        no: "2023Q4(b)",
+        q: "Explain Unrestricted Grammars and their equivalence with Turing Machines.",
+        p: "2023-24 (TAFL)",
+        m: 10,
+        d: "Medium",
+        repeat: true
+      },
+
+      {
+        u: 4,
+        no: "2023Q5(a)",
+        q: "Explain Church-Turing Thesis and Universal Turing Machine.",
+        p: "2023-24 (TAFL)",
+        m: 10,
+        d: "Medium",
+        repeat: true
+      },// ========================== UNIT 5 ==========================
+      // Halting Problem, Undecidability, Recursive Languages,
+      // PCP, MPCP, Counter Machines
+
+      {
+        u: 5,
+        no: "2025Q5(b)(i)",
+        q: "Write a brief explanation of Halting Problem.",
+        p: "2024-25 Even",
+        m: 5,
+        d: "Easy",
+        repeat: true
+      },
+
+      {
+        u: 5,
+        no: "2025Q5(b)(ii)",
+        q: "Write a brief explanation of Church-Turing Thesis.",
+        p: "2024-25 Even",
+        m: 5,
+        d: "Easy",
+        repeat: true
+      },
+
+      {
+        u: 5,
+        no: "2025Q5(b)(iii)",
+        q: "Write a brief explanation of Universal Turing Machine.",
+        p: "2024-25 Even",
+        m: 5,
+        d: "Easy",
+        repeat: true
+      },
+
+      {
+        u: 5,
+        no: "2024Q4(c)",
+        q: "What are Recursive Languages? Discuss the Properties of Recursive Languages.",
+        p: "2023-24",
+        m: 10,
+        d: "Medium",
+        repeat: true
+      },
+
+      {
+        u: 5,
+        no: "2024Q5(b)",
+        q: "Discuss Undecidable Problems about Turing Machines.",
+        p: "2023-24",
+        m: 10,
+        d: "Medium",
+        repeat: true
+      },
+
+      {
+        u: 5,
+        no: "2024Q5(c)",
+        q: "Design a Turing Machine to recognize all the strings consisting of an even number of 1's. Give the idea of construction and transition table for the Turing Machine.",
+        p: "2023-24",
+        m: 10,
+        d: "Hard",
+        repeat: true
+      },
+
+      {
+        u: 5,
+        no: "2023Q1(f)",
+        q: "Explain the different Closure Properties of Recursive Languages.",
+        p: "2023-24 (TAFL)",
+        m: 5,
+        d: "Easy",
+        repeat: true
+      },
+
+      {
+        u: 5,
+        no: "2023Q5(a)",
+        q: "Explain Church-Turing Thesis and Universal Turing Machine.",
+        p: "2023-24 (TAFL)",
+        m: 10,
+        d: "Medium",
+        repeat: true
+      },
+
+      {
+        u: 5,
+        no: "2023Q5(b)",
+        q: "Explain Post Correspondence Problem (PCP) and Unsolvable Decision Problem.",
+        p: "2023-24 (TAFL)",
+        m: 10,
+        d: "Medium",
+        repeat: true
+      },
+
+      {
+        u: 5,
+        no: "2023Q5(c)",
+        q: "What is the Halting Problem of a Turing Machine? Design a Turing Machine that erases all non-blank symbols on the tape over the alphabet Σ={a,b}.",
+        p: "2023-24 (TAFL)",
+        m: 10,
+        d: "Hard",
+        repeat: true
+      },
+
+      // ========================== MOST REPEATED ==========================
+
+      {
+        u: 0,
+        no: "MR-01",
+        q: "Construct a Deterministic Finite Automaton (DFA) for a given language.",
+        p: "Repeated (2023, 2024, 2025)",
+        m: 10,
+        d: "Medium",
+        repeat: true
+      },
+
+      {
+        u: 0,
+        no: "MR-02",
+        q: "Convert DFA to Regular Expression / Regular Expression to DFA.",
+        p: "Repeated (2023, 2024, 2025)",
+        m: 10,
+        d: "Hard",
+        repeat: true
+      },
+
+      {
+        u: 0,
+        no: "MR-03",
+        q: "State and prove Arden's Theorem.",
+        p: "Repeated (2023, 2025)",
+        m: 10,
+        d: "Hard",
+        repeat: true
+      },
+
+      {
+        u: 0,
+        no: "MR-04",
+        q: "Explain Pumping Lemma for Regular Languages.",
+        p: "Repeated (2023, 2024)",
+        m: 5,
+        d: "Easy",
+        repeat: true
+      },
+
+      {
+        u: 0,
+        no: "MR-05",
+        q: "Differentiate between DFA and NFA.",
+        p: "Repeated (2023, 2024)",
+        m: 5,
+        d: "Easy",
+        repeat: true
+      },
+
+      {
+        u: 0,
+        no: "MR-06",
+        q: "Differentiate between Mealy Machine and Moore Machine.",
+        p: "Repeated (2023, 2025)",
+        m: 5,
+        d: "Easy",
+        repeat: true
+      },
+
+      {
+        u: 0,
+        no: "MR-07",
+        q: "Convert a grammar into Chomsky Normal Form (CNF).",
+        p: "Repeated (2023, 2024, 2025)",
+        m: 10,
+        d: "Hard",
+        repeat: true
+      },
+
+      {
+        u: 0,
+        no: "MR-08",
+        q: "Construct a Pushdown Automaton (PDA) for a given language.",
+        p: "Repeated (2023, 2024, 2025)",
+        m: 10,
+        d: "Hard",
+        repeat: true
+      },
+
+      {
+        u: 0,
+        no: "MR-09",
+        q: "Explain Parse Tree with Leftmost and Rightmost Derivation.",
+        p: "Repeated (2023, 2024, 2025)",
+        m: 10,
+        d: "Medium",
+        repeat: true
+      },
+
+      {
+        u: 0,
+        no: "MR-10",
+        q: "Explain Context Sensitive Grammar (CSG) and Unrestricted Grammar.",
+        p: "Repeated (2023, 2025)",
+        m: 10,
+        d: "Medium",
+        repeat: true
+      },
+
+      {
+        u: 0,
+        no: "MR-11",
+        q: "Design a Turing Machine for a specified language.",
+        p: "Repeated (2023, 2024, 2025)",
+        m: 10,
+        d: "Hard",
+        repeat: true
+      },
+
+      {
+        u: 0,
+        no: "MR-12",
+        q: "Explain Recursive Languages and their Properties.",
+        p: "Repeated (2023, 2024, 2025)",
+        m: 10,
+        d: "Medium",
+        repeat: true
+      },
+
+      {
+        u: 0,
+        no: "MR-13",
+        q: "Discuss Undecidable Problems about Turing Machines.",
+        p: "Repeated (2023, 2024)",
+        m: 10,
+        d: "Medium",
+        repeat: true
+      },
+
+      {
+        u: 0,
+        no: "MR-14",
+        q: "Explain Church-Turing Thesis and Universal Turing Machine.",
+        p: "Repeated (2023, 2024, 2025)",
+        m: 10,
+        d: "Medium",
+        repeat: true
+      },
+
+      {
+        u: 0,
+        no: "MR-15",
+        q: "Explain the Halting Problem of a Turing Machine.",
+        p: "Repeated (2023, 2024, 2025)",
+        m: 10,
+        d: "Medium",
+        repeat: true
+      },// ========================== UNIT 4 (REMAINING PYQs) ==========================
+
+      {
+        u: 4,
+        no: "2025Q3(b)",
+        q: "Explain Turing-Recognizable (Recursively Enumerable) Languages and Turing-Decidable (Recursive) Languages. Differentiate between them with suitable examples.",
+        p: "2024-25 Even",
+        m: 10,
+        d: "Medium",
+        repeat: true
+      },
+
+      {
+        u: 4,
+        no: "2025Q4(a)(i)",
+        q: "Explain Chomsky Hierarchy in detail. Classify Type-0, Type-1, Type-2 and Type-3 Grammars and specify the corresponding Automata recognizing each class of languages.",
+        p: "2024-25 Even",
+        m: 10,
+        d: "Medium",
+        repeat: true
+      },
+
+      {
+        u: 4,
+        no: "2025Q5(c)",
+        q: "Design a Turing Machine for Σ={a,b,c} that accepts the language L={aⁿbⁿcⁿ | n≥1}. Explain the formal definition, transition function and complete execution of the machine.",
+        p: "2024-25 Even",
+        m: 10,
+        d: "Hard",
+        repeat: true
+      },
+
+      {
+        u: 4,
+        no: "2024Q3(b)",
+        q: "Design a Turing Machine with no more than three states that accepts the language L=a(a+b)* over Σ={a,b}. Is it possible to construct such a machine using only two states? Justify your answer.",
+        p: "2023-24",
+        m: 10,
+        d: "Hard",
+        repeat: true
+      },
+
+      {
+        u: 4,
+        no: "2024Q4(a)",
+        q: "Design a Turing Machine that copies strings consisting only of 1's. More precisely, construct a machine that performs q₀w ⊢* qfww. Also provide the pseudocode of the machine.",
+        p: "2023-24",
+        m: 10,
+        d: "Hard"
+      },
+
+      {
+        u: 4,
+        no: "2024Q4(c)",
+        q: "What are Recursive Languages? Explain their Closure Properties with suitable examples.",
+        p: "2023-24",
+        m: 10,
+        d: "Medium",
+        repeat: true
+      },
+
+      {
+        u: 4,
+        no: "2024Q5(b)",
+        q: "Discuss Undecidable Problems related to Turing Machines. Explain why these problems cannot be solved algorithmically.",
+        p: "2023-24",
+        m: 10,
+        d: "Medium",
+        repeat: true
+      },
+
+      {
+        u: 4,
+        no: "2023Q1(d)",
+        q: "Explain Chomsky Hierarchy of Languages with neat classification diagram.",
+        p: "2023-24 (TAFL)",
+        m: 5,
+        d: "Easy",
+        repeat: true
+      },
+
+      {
+        u: 4,
+        no: "2023Q1(e)",
+        q: "Differentiate between Type-0 Grammar and Type-1 Grammar.",
+        p: "2023-24 (TAFL)",
+        m: 5,
+        d: "Easy"
+      },
+
+      {
+        u: 4,
+        no: "2023Q4(b)",
+        q: "Explain Unrestricted Grammars. Show their equivalence with Turing Machines using suitable examples.",
+        p: "2023-24 (TAFL)",
+        m: 10,
+        d: "Medium",
+        repeat: true
+      },
+
+      {
+        u: 4,
+        no: "2023Q5(a)",
+        q: "Explain Church-Turing Thesis. What is a Universal Turing Machine? Discuss their significance in Theory of Computation.",
+        p: "2023-24 (TAFL)",
+        m: 10,
+        d: "Medium",
+        repeat: true
+      },
+
+      {
+        u: 4,
+        no: "2023Q5(d)",
+        q: "Explain Turing Machine as an Enumerator. How is an Enumerator related to Recursively Enumerable Languages?",
+        p: "2023-24 (TAFL)",
+        m: 10,
+        d: "Hard"
+      },
+
+      {
+        u: 4,
+        no: "2023Q5(e)",
+        q: "Differentiate between Deterministic Turing Machine (DTM) and Non-Deterministic Turing Machine (NTM). Discuss their computational equivalence.",
+        p: "2023-24 (TAFL)",
+        m: 10,
+        d: "Medium"
+      },
+
+      {
+        u: 4,
+        no: "2023Q5(f)",
+        q: "Explain Linear Bounded Automata (LBA). Show the equivalence between Context Sensitive Grammars (CSG) and Linear Bounded Automata.",
+        p: "2023-24 (TAFL)",
+        m: 10,
+        d: "Hard",
+        repeat: true
+      },
+
+
+      // ========================== UNIT 5 (REMAINING PYQs) ==========================
+
+      {
+        u: 5,
+        no: "2025Q5(b)(i)",
+        q: "Write a short note on Halting Problem.",
+        p: "2024-25 Even",
+        m: 5,
+        d: "Easy",
+        repeat: true
+      },
+
+      {
+        u: 5,
+        no: "2025Q5(b)(ii)",
+        q: "Write a short note on Church-Turing Thesis.",
+        p: "2024-25 Even",
+        m: 5,
+        d: "Easy",
+        repeat: true
+      },
+
+      {
+        u: 5,
+        no: "2025Q5(b)(iii)",
+        q: "Write a short note on Universal Turing Machine.",
+        p: "2024-25 Even",
+        m: 5,
+        d: "Easy",
+        repeat: true
+      },
+
+      {
+        u: 5,
+        no: "2024Q5(b)",
+        q: "Discuss Undecidable Problems about Turing Machines with suitable examples.",
+        p: "2023-24",
+        m: 10,
+        d: "Medium",
+        repeat: true
+      },
+
+      {
+        u: 5,
+        no: "2024Q5(c)",
+        q: "Design a Turing Machine that recognizes all strings containing an even number of 1's. Explain the transition table and state diagram.",
+        p: "2023-24",
+        m: 10,
+        d: "Hard",
+        repeat: true
+      },
+
+      {
+        u: 5,
+        no: "2023Q1(f)",
+        q: "Explain the Closure Properties of Recursive Languages.",
+        p: "2023-24 (TAFL)",
+        m: 5,
+        d: "Easy",
+        repeat: true
+      },
+
+      {
+        u: 5,
+        no: "2023Q5(b)",
+        q: "Explain Post Correspondence Problem (PCP). Why is PCP considered an Undecidable Problem?",
+        p: "2023-24 (TAFL)",
+        m: 10,
+        d: "Medium",
+        repeat: true
+      },
+
+      {
+        u: 5,
+        no: "2023Q5(c)",
+        q: "Explain the Halting Problem. Design a Turing Machine that erases all non-blank symbols from the tape over Σ={a,b}.",
+        p: "2023-24 (TAFL)",
+        m: 10,
+        d: "Hard",
+        repeat: true
+      },
+
+      {
+        u: 5,
+        no: "2023Q5(g)",
+        q: "Explain Modified Post Correspondence Problem (MPCP). Compare it with the standard Post Correspondence Problem (PCP).",
+        p: "2023-24 (TAFL)",
+        m: 10,
+        d: "Medium"
+      },
+
+      {
+        u: 5,
+        no: "2023Q5(h)",
+        q: "Explain Counter Machines. Compare Counter Machines with Turing Machines and discuss their computational capabilities.",
+        p: "2023-24 (TAFL)",
+        m: 10,
+        d: "Medium"
+      },
+
+      {
+        u: 5,
+        no: "2023Q5(i)",
+        q: "Explain a Language that is not Recursively Enumerable with suitable justification.",
+        p: "2023-24 (TAFL)",
+        m: 10,
+        d: "Hard"
+      },
+
+      {
+        u: 5,
+        no: "2023Q5(j)",
+        q: "Explain an Undecidable Problem that is Recursively Enumerable (RE).",
+        p: "2023-24 (TAFL)",
+        m: 10,
+        d: "Hard"
+      }]
+    const grid = document.getElementById("grid");
+    const empty = document.getElementById("empty");
+
+    const search = document.getElementById("search");
+
+    const pageTitle = document.getElementById("pageTitle");
+
+    let currentUnit = "all";
+    let currentDifficulty = "all";
+
+
+    // ======================================================
+    // COUNTS
+    // ======================================================
+
+    document.getElementById("allCount").innerText = Q.length;
+
+    document.getElementById("repeatCount").innerText =
+      Q.filter(x => x.repeat).length;
+
+    for (let i = 1; i <= 5; i++) {
+
+      document.getElementById("u" + i).innerText =
+        Q.filter(x => x.u == i).length;
+
+    }
+
+
+    // ======================================================
+    // BADGE
+    // ======================================================
+
+    function difficultyClass(d) {
+
+      if (d === "Easy") return "easy";
+
+      if (d === "Medium") return "medium";
+
+      return "hard";
+
+    }
+
+
+    // ======================================================
+    // CARD
+    // ======================================================
+
+    function card(q) {
+
+      return `
+
+<div class="card">
+
+<div class="badges">
+
+<span class="badge unit">
+Unit ${q.u}
+</span>
+
+<span class="badge ${difficultyClass(q.d)}">
+
+${q.d}
+
+</span>
+
+${q.repeat
+          ?
+
+          `<span class="badge repeat">
+
+🔥 Repeated
+
+</span>`
+
+          :
+
+          ""
+
+        }
+
+</div>
+
+<div class="qno">
+
+${q.no}
+
+</div>
+
+<div class="question">
+
+${q.q}
+
+</div>
+
+<div class="footer">
+
+<span>
+
+${q.p}
+
+</span>
+
+<span>
+
+${q.m} Marks
+
+</span>
+
+</div>
+
+</div>
+
+`;
+
+    }
+
+
+    // ======================================================
+    // RENDER
+    // ======================================================
+
+    function render(list) {
+
+      grid.innerHTML = "";
+
+      if (list.length == 0) {
+
+        empty.style.display = "block";
+
+        return;
+
+      }
+
+      empty.style.display = "none";
+
+      grid.innerHTML =
+
+        list.map(card).join("");
+
+    }
+
+
+    // ======================================================
+    // FILTERS
+    // ======================================================
+
+    function getFilteredData() {
+
+      let data = [...Q];
+
+
+      // Unit
+
+      if (currentUnit === "repeat") {
+
+        data = data.filter(x => x.repeat);
+
+      }
+
+      else if (currentUnit !== "all") {
+
+        data = data.filter(
+
+          x => x.u == currentUnit
+
+        );
+
+      }
+
+
+      // Difficulty
+
+      if (currentDifficulty !== "all") {
+
+        if (
+
+          currentDifficulty == "5"
+
+          ||
+
+          currentDifficulty == "10"
+
+        ) {
+
+          data = data.filter(
+
+            x => x.m == currentDifficulty
+
+          );
+
+        }
+
+        else {
+
+          data = data.filter(
+
+            x => x.d == currentDifficulty
+
+          );
+
+        }
+
+      }
+
+
+      // Search
+
+      const keyword =
+
+        search.value
+
+          .toLowerCase()
+
+          .trim();
+
+      if (keyword != "") {
+
+        data = data.filter(q =>
+
+          q.q.toLowerCase().includes(keyword)
+
+          ||
+
+          q.no.toLowerCase().includes(keyword)
+
+          ||
+
+          q.p.toLowerCase().includes(keyword)
+
+        );
+
+      }
+
+      return data;
+
+    }
+
+
+    // ======================================================
+    // UPDATE
+    // ======================================================
+
+    function update() {
+
+      render(
+
+        getFilteredData()
+
+      );
+
+    }
+    // ======================================================
+    // SIDEBAR FILTERS
+    // ======================================================
+
+    document
+      .querySelectorAll(".nav-item")
+      .forEach(item => {
+
+        item.onclick = () => {
+
+          document
+            .querySelectorAll(".nav-item")
+            .forEach(x => x.classList.remove("active"));
+
+          item.classList.add("active");
+
+          currentUnit = item.dataset.filter;
+
+          switch (currentUnit) {
+
+            case "all":
+
+              pageTitle.innerText = "All Questions";
+
+              break;
+
+            case "repeat":
+
+              pageTitle.innerText = "Most Repeated Questions";
+
+              break;
+
+            default:
+
+              pageTitle.innerText =
+                `Unit ${currentUnit} Questions`;
+
+          }
+
+          update();
+
+        };
+
+      });
+
+
+    // ======================================================
+    // TOOLBAR FILTERS
+    // ======================================================
+
+    document
+      .querySelectorAll(".chip")
+      .forEach(chip => {
+
+        chip.onclick = () => {
+
+          document
+            .querySelectorAll(".chip")
+            .forEach(x => x.classList.remove("active"));
+
+          chip.classList.add("active");
+
+          currentDifficulty =
+
+            chip.dataset.chip;
+
+          update();
+
+        };
+
+      });
+
+
+    // ======================================================
+    // LIVE SEARCH
+    // ======================================================
+
+    search.addEventListener(
+
+      "input",
+
+      () => {
+
+        update();
+
+      }
+
+    );
+
+
+    // ======================================================
+    // SORTING
+    // ======================================================
+
+    Q.sort((a, b) => {
+
+      if (a.u !== b.u)
+
+        return a.u - b.u;
+
+      return a.no.localeCompare(b.no);
+
+    });
+
+
+    // ======================================================
+    // SIDEBAR TOGGLE (MOBILE)
+    // ======================================================
+
+    const sidebarEl = document.querySelector('aside');
+    const overlayEl = document.getElementById('overlay');
+    const hamburgerBtn = document.getElementById('hamburger');
+
+    hamburgerBtn.addEventListener('click', () => {
+      sidebarEl.classList.toggle('open');
+      overlayEl.classList.toggle('show');
+    });
+
+    overlayEl.addEventListener('click', () => {
+      sidebarEl.classList.remove('open');
+      overlayEl.classList.remove('show');
+    });
+
+    // Auto-close sidebar when nav item clicked on mobile
+    document.querySelectorAll('.nav-item').forEach(item => {
+      item.addEventListener('click', () => {
+        if (window.innerWidth <= 900) {
+          sidebarEl.classList.remove('open');
+          overlayEl.classList.remove('show');
+        }
+      });
+    });
+
+
+    // ======================================================
+    // GOOGLE SHEETS VISITOR TRACKER
+    // ======================================================
+    //
+    // SETUP KARNE KA TARIKA:
+    // 1. Apna Google Sheet open karo
+    // 2. Extensions → Apps Script → naya script kholo
+    // 3. Neeche wala code paste karo:
+    //
+    //    function doPost(e) {
+    //      var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+    //      var data = JSON.parse(e.postData.contents);
+    //      sheet.appendRow([
+    //        data.timestamp, data.event, data.extra,
+    //        data.userAgent, data.page, data.referrer
+    //      ]);
+    //      return ContentService.createTextOutput('OK');
+    //    }
+    //
+    // 4. Deploy → New deployment → Web App
+    //    Execute as: Me | Who has access: Anyone
+    // 5. Copy the Web App URL aur neeche paste karo
+
+    const SHEETS_URL = 'https://script.google.com/macros/s/AKfycby1sTfx7WVHnB0TSICBetOVEvRy-WmaTK_gJaidgmYgr48-MiLvS57fHDTxtWV86GKuLw/exec';
+
+    function logToSheets(event, extra, name, phone) {
+      if (!SHEETS_URL || SHEETS_URL === 'YOUR_APPS_SCRIPT_URL') return;
+      const data = {
+        timestamp: new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }),
+        event: event || 'page_view',
+        extra: extra || '',
+        name: name || '',
+        phone: phone || '',
+        userAgent: navigator.userAgent.substring(0, 120),
+        page: document.title,
+        referrer: document.referrer || 'direct'
+      };
+      fetch(SHEETS_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      }).catch(() => { }); // Silent fail
+    }
+
+    // Page load hone par log karo
+    logToSheets('page_view');
+
+
+    // ======================================================
+    // RAZORPAY PAYMENT GATE — Rs.10 Lifetime Access
+    // ======================================================
+    //
+    // SETUP: Razorpay Dashboard → Settings → API Keys
+    // Test key: rzp_test_XXXXXXXX
+    // Live key: rzp_live_XXXXXXXX
+
+    // ======================================================
+    // PAYMENT GATE — Razorpay.me Payment Link
+    // ======================================================
+    // No API keys needed! Payment link se kaam chalega.
+    // Flow: Pay button → Razorpay.me link opens → User enters Transaction ID → Access granted
+
+    const PAYMENT_LINK = 'https://razorpay.me/@ujjwalsrivastava?amount=10';
+
+    // =====================================================================
+    // SECURITY LAYER — Obfuscated keys + tamper-detection
+    // Keys are not obvious so console snoopers can't easily find them.
+    // A signed token (simple HMAC-like hash) is stored alongside access.
+    // If token doesn't match → access revoked instantly.
+    // =====================================================================
+    const _K = {
+      access: 'fla_' + btoa('access').replace(/=/g, ''),
+      name: 'fla_' + btoa('uname').replace(/=/g, ''),
+      phone: 'fla_' + btoa('uphon').replace(/=/g, ''),
+      txn: 'fla_' + btoa('utxn').replace(/=/g, ''),
+      sig: 'fla_' + btoa('usig').replace(/=/g, '')
+    };
+
+    // Simple deterministic "signature" — not cryptographic but enough to
+    // detect manual localStorage tampering without a real backend.
+    function _sign(txn, name, phone) {
+      const raw = txn + '|' + name + '|' + phone + '|fla2025';
+      let h = 0;
+      for (let i = 0; i < raw.length; i++) {
+        h = (Math.imul(31, h) + raw.charCodeAt(i)) | 0;
+      }
+      return (h >>> 0).toString(36);
+    }
+
+    function _clearAccess() {
+      Object.values(_K).forEach(k => localStorage.removeItem(k));
+      // Also wipe old plain-text keys in case they exist
+      ['coa_pyq_access_v1', 'coa_txn_id', 'coa_user_name', 'coa_user_phone'].forEach(
+        k => localStorage.removeItem(k)
+      );
+    }
+
+    const payOverlay = document.getElementById('payOverlay');
+    const payBtn = document.getElementById('payBtn');
+    const payStep2 = document.getElementById('payStep2');
+    const txnInput = document.getElementById('txnInput');
+    const verifyBtn = document.getElementById('verifyBtn');
+
+    // Ensure overlay cannot be hidden via CSS overrides — re-enforce inline
+    function _showOverlay() { payOverlay.style.cssText += ';display:flex!important;opacity:1!important;visibility:visible!important;pointer-events:all!important;'; }
+    function _hideOverlay() { payOverlay.style.cssText += ';display:none!important;'; }
+
+    function checkAccess() {
+      const granted = localStorage.getItem(_K.access) === 'ok';
+      const name = localStorage.getItem(_K.name);
+      const phone = localStorage.getItem(_K.phone);
+      const txn = localStorage.getItem(_K.txn);
+      const sig = localStorage.getItem(_K.sig);
+
+      if (granted && name && phone && txn && sig) {
+        // Verify tamper-detection signature
+        const expected = _sign(txn, name, phone);
+        if (sig === expected) {
+          _hideOverlay();
+          return;
+        }
+        // Signature mismatch — someone tampered with localStorage!
+        _clearAccess();
+      } else if (granted) {
+        // 'granted' set hai but details missing — bypass attempt
+        _clearAccess();
+      }
+      // Default: show overlay
+      _showOverlay();
+    }
+
+    function _grantAccess(txnId, name, phone) {
+      // Store with tamper-detection signature
+      const sig = _sign(txnId, name, phone);
+      localStorage.setItem(_K.access, 'ok');
+      localStorage.setItem(_K.txn, txnId);
+      localStorage.setItem(_K.name, name);
+      localStorage.setItem(_K.phone, phone);
+      localStorage.setItem(_K.sig, sig);
+      // Smooth fade out
+      payOverlay.style.transition = 'opacity .4s';
+      payOverlay.style.opacity = '0';
+      setTimeout(() => { _hideOverlay(); payOverlay.style.opacity = '1'; }, 400);
+      logToSheets('payment_success', txnId, name, phone);
+    }
+
+    // Payment anchor link — update style after click to show it was opened
+    payBtn.addEventListener('click', function () {
+      setTimeout(() => {
+        payBtn.textContent = '\u2713 Razorpay Opened \u2014 Complete payment & come back';
+        payBtn.style.background = 'linear-gradient(135deg, #f59e0b, #d97706)';
+        payBtn.style.boxShadow = '0 8px 24px rgba(245,158,11,.4)';
+        payBtn.style.opacity = '0.9';
+      }, 200);
+    });
+
+    // Step 2: Collect name, phone, transaction ID — then grant access
+    const nameInput = document.getElementById('nameInput');
+    const phoneInput = document.getElementById('phoneInput');
+
+    function markError(el, msg) {
+      el.style.borderColor = '#ef4444';
+      el.style.boxShadow = '0 0 0 3px rgba(239,68,68,.15)';
+      el.placeholder = msg;
+      el.focus();
+    }
+    function markOk(el) {
+      el.style.borderColor = '#10b981';
+      el.style.boxShadow = '0 0 0 3px rgba(16,185,129,.15)';
+    }
+
+    // ======================================================
+    // PROFANITY FILTER — Gaali likhi to block
+    // ======================================================
+    const BANNED_WORDS = [
+      // Hindi gaalis (romanized)
+      'madarchod', 'maderchod', 'madarjat', 'maadar', 'bhenchod', 'behenchod', 'behen ke',
+      'maa ke', 'maa ki', 'teri maa', 'teri behen', 'bc', 'mc', 'bkl', 'mfkr',
+      'chutiya', 'chutiye', 'chut', 'bhosdike', 'bhosdika', 'bhosda', 'bhosdi', 'bhosd',
+      'harami', 'randi', 'randwa', 'bhadwa', 'bhadwe', 'rande', 'gandu', 'gaand', 'gand',
+      'lodu', 'laude', 'lauda', 'lawda', 'lund', 'lun', 'landi',
+      'kamina', 'kamine', 'kutte', 'kuttiya', 'ullu', 'saale', 'saali', 'kamine',
+      'madhar', 'sala gandu', 'bkl', 'mkc', 'lmao chut', 'chutad',
+      // English
+      'fuck', 'fucker', 'fucking', 'motherfucker', 'mf', 'wtf',
+      'shit', 'bullshit', 'bitch', 'asshole', 'bastard',
+      'dick', 'cock', 'pussy', 'cunt', 'tits', 'boobs',
+      'whore', 'slut', 'nigger', 'nigga', 'porn', 'nude', 'naked', 'sex'
+    ];
+
+    function containsProfanity(text) {
+      if (!text) return false;
+      const lower = text.toLowerCase().trim();
+      return BANNED_WORDS.some(word => {
+        try {
+          const escaped = word.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+          return new RegExp('(^|[\\s,.]|\\b)' + escaped + '([\\s,.]|\\b|$)', 'i').test(lower)
+            || lower.includes(word);
+        } catch (e) {
+          return lower.includes(word);
+        }
+      });
+    }
+
+    // =====================================================================
+    // RAZORPAY TRANSACTION ID VALIDATOR
+    // Real format (confirmed): pay_XXXXXXXXXXXXXX (pay_ + exactly 14-16 chars)
+    // Example: pay_T9iOXp824bvYB2  ← 14 alphanumeric chars after pay_
+    // =====================================================================
+    function isValidRazorpayTxn(txn) {
+      if (!txn) return false;
+      return /^pay_[A-Za-z0-9]{14,16}$/.test(txn.trim());
+    }
+
+    // =====================================================================
+    // RATE LIMITER — Max 5 attempts per session, 30s cooldown after 3 fails
+    // =====================================================================
+    let _attempts = 0;
+    let _cooldownUntil = 0;
+
+    function _isCoolingDown() {
+      return Date.now() < _cooldownUntil;
+    }
+
+    verifyBtn.addEventListener('click', function () {
+      if (_isCoolingDown()) {
+        const secs = Math.ceil((_cooldownUntil - Date.now()) / 1000);
+        verifyBtn.innerHTML = `⏳ Ruko ${secs}s...`;
+        return;
+      }
+      if (_attempts >= 5) {
+        verifyBtn.innerHTML = '🚫 Too many attempts. Refresh karo.';
+        verifyBtn.disabled = true;
+        return;
+      }
+
+      const name = nameInput.value.trim();
+      const phone = phoneInput.value.trim();
+      const txn = txnInput.value.trim();
+
+      if (!name || name.length < 2) {
+        markError(nameInput, '⚠️ Apna naam daalo');
+        return;
+      }
+      if (containsProfanity(name)) {
+        markError(nameInput, '🚫 Seedha naam daalo');
+        nameInput.value = '';
+        return;
+      }
+
+      const digits = phone.replace(/\D/g, '');
+      if (!digits || digits.length !== 10 || !/^[6-9]\d{9}$/.test(digits)) {
+        markError(phoneInput, '⚠️ Valid Indian 10-digit number daalo (6-9 se shuru)');
+        return;
+      }
+
+      if (!txn) {
+        markError(txnInput, '⚠️ Transaction ID daalo');
+        return;
+      }
+      if (!isValidRazorpayTxn(txn)) {
+        _attempts++;
+        if (_attempts >= 3) _cooldownUntil = Date.now() + 30000;
+        markError(txnInput, '❌ Razorpay ID format galat hai (e.g. pay_T9iOXp824bvYB2)');
+        txnInput.value = '';
+        return;
+      }
+
+      _attempts = 0;
+      markOk(nameInput); markOk(phoneInput); markOk(txnInput);
+      verifyBtn.innerHTML = '&#9203; Verifying...';
+      verifyBtn.disabled = true;
+
+      setTimeout(() => _grantAccess(txn, name, digits), 700);
+    });
+
+    [nameInput, phoneInput, txnInput].forEach(inp => {
+      inp.addEventListener('input', () => {
+        inp.style.borderColor = '#d1d5db';
+        inp.style.boxShadow = 'none';
+        if (inp === nameInput && containsProfanity(inp.value)) {
+          inp.style.borderColor = '#ef4444';
+          inp.style.boxShadow = '0 0 0 3px rgba(239,68,68,.15)';
+          inp.style.background = '#fff5f5';
+        } else if (inp === nameInput) {
+          inp.style.background = '#fff';
+        }
+      });
+      inp.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') verifyBtn.click();
+      });
+    });
+
+    // =====================================================================
+    // ANTI-BYPASS GUARDS
+    // =====================================================================
+    document.addEventListener('visibilitychange', () => {
+      if (document.visibilityState === 'visible') checkAccess();
+    });
+    window.addEventListener('focus', checkAccess);
+    setInterval(checkAccess, 10000);
+
+    // Page load par check karo — already paid hai to seedha andar jao
+    checkAccess();
+
+
+    // ======================================================
+    // INITIAL RENDER
+    // ======================================================
+
+    update();
+
+
+    // ======================================================
+    // FINAL AUDIT
+    // ======================================================
+
+    console.group(
+
+      "FLA QUESTION BANK"
+
+    );
+
+    console.log(
+
+      "TOTAL QUESTIONS :",
+
+      Q.length
+
+    );
+
+    console.log(
+
+      "REPEATED :",
+
+      Q.filter(x => x.repeat).length
+
+    );
+
+    for (let i = 1; i <= 5; i++) {
+
+      console.log(
+
+        `UNIT ${i} :`,
+
+        Q.filter(x => x.u == i).length
+
+      );
+
+    }
+
+    console.groupEnd();
+
+
+    // ======================================================
+    // OPTIONAL FUNCTIONS
+    // ======================================================
+
+    function exportUnit(unit) {
+
+      return Q.filter(
+
+        x => x.u == unit
+
+      );
+
+    }
+
+    function exportRepeated() {
+
+      return Q.filter(
+
+        x => x.repeat
+
+      );
+
+    }
+
+    function exportEasy() {
+
+      return Q.filter(
+
+        x => x.d === "Easy"
+
+      );
+
+    }
+
+    function exportMedium() {
+
+      return Q.filter(
+
+        x => x.d === "Medium"
+
+      );
+
+    }
+
+    function exportHard() {
+
+      return Q.filter(
+
+        x => x.d === "Hard"
+
+      );
+
+    }
+
+
+    // ======================================================
+    // KEYBOARD SHORTCUTS
+    // ======================================================
+
+    window.addEventListener(
+
+      "keydown",
+
+      e => {
+
+        if (
+
+          e.ctrlKey
+
+          &&
+
+          e.key === "/"
+
+        ) {
+
+          e.preventDefault();
+
+          search.focus();
+
+        }
+
+      });
+
+
+    // ======================================================
+    // END
+    // ======================================================
+
+  </script>
+
+</body>
+
+</html>
